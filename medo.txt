@@ -1,0 +1,223 @@
+{
+  "type": "Request",
+  "kind": "PowerAppV2",
+  "inputs": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "description": "Insira um número",
+          "title": "ID_Numero",
+          "type": "number",
+          "x-ms-content-hint": "NUMBER",
+          "x-ms-dynamically-added": true
+        },
+        "number_1": {
+          "description": "Insira um número",
+          "title": "Revisao",
+          "type": "number",
+          "x-ms-content-hint": "NUMBER",
+          "x-ms-dynamically-added": true
+        },
+        "date": {
+          "description": "Insira sua entrada",
+          "format": "date",
+          "title": "DataRevisao",
+          "type": "string",
+          "x-ms-content-hint": "DATE",
+          "x-ms-dynamically-added": true
+        },
+        "date_1": {
+          "description": "Insira sua entrada",
+          "format": "date",
+          "title": "DataEmissao",
+          "type": "string",
+          "x-ms-content-hint": "DATE",
+          "x-ms-dynamically-added": true
+        },
+        "text": {
+          "description": "Insira sua entrada",
+          "title": "Referente",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_1": {
+          "description": "Insira sua entrada",
+          "title": "NomeContato",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_2": {
+          "description": "Insira sua entrada",
+          "title": "TipoTransporte",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_4": {
+          "description": "Insira sua entrada",
+          "title": "Validade",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_5": {
+          "description": "Insira sua entrada",
+          "title": "Entrega",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_6": {
+          "description": "Insira sua entrada",
+          "title": "Pagamento",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "number_5": {
+          "description": "Insira um número",
+          "title": "ValorTotal",
+          "type": "number",
+          "x-ms-content-hint": "NUMBER",
+          "x-ms-dynamically-added": true
+        },
+        "text_7": {
+          "description": "Insira sua entrada",
+          "title": "usuario",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_11": {
+          "description": "Insira sua entrada",
+          "title": "Diferimento",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_12": {
+          "description": "UnidFat",
+          "title": "UnidadeFat",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_13": {
+          "description": "Finalidade",
+          "title": "Finalidade",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_14": {
+          "description": "Insira sua entrada",
+          "title": "Endereco",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_15": {
+          "description": "Insira sua entrada",
+          "title": "dadoscnpj",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_16": {
+          "description": "Insira sua entrada",
+          "title": "frete",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_17": {
+          "description": "Insira sua entrada",
+          "title": "cobranca",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_18": {
+          "description": "Insira sua entrada",
+          "title": "assinatura",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_19": {
+          "description": "Insira sua entrada",
+          "title": "id_cliente",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_20": {
+          "description": "Insira sua entrada",
+          "title": "items",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "number_2": {
+          "description": "Insira um número",
+          "title": "total_liq",
+          "type": "number",
+          "x-ms-content-hint": "NUMBER",
+          "x-ms-dynamically-added": true
+        },
+        "number_3": {
+          "description": "Insira um número",
+          "title": "total_c_impostos",
+          "type": "number",
+          "x-ms-content-hint": "NUMBER",
+          "x-ms-dynamically-added": true
+        },
+        "text_3": {
+          "description": "Insira sua entrada",
+          "title": "nome_usuario",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_8": {
+          "description": "Insira sua entrada",
+          "title": "email_sec",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        }
+      },
+      "required": [
+        "number",
+        "number_1",
+        "date",
+        "date_1",
+        "text",
+        "text_1",
+        "text_2",
+        "text_4",
+        "text_5",
+        "text_6",
+        "number_5",
+        "text_7",
+        "text_11",
+        "text_12",
+        "text_13",
+        "text_14",
+        "text_15",
+        "text_16",
+        "text_17",
+        "text_18",
+        "text_19",
+        "text_20",
+        "number_2",
+        "number_3",
+        "text_3",
+        "text_8"
+      ]
+    }
+  }
+}

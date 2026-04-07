@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbrape - Cotação</title>
+    <style>
+        /* ══════════════════════════════════════
+           GERAL
+        ══════════════════════════════════════ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #1a1a1a;
+            background: #fff;
+        }
+
+        /* ══════════════════════════════════════
+           SEPARAÇÃO DE PÁGINAS
+        ══════════════════════════════════════ */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        /* ══════════════════════════════════════
+           PÁGINA 1 — COTAÇÃO FORMAL
+        ══════════════════════════════════════ */
+        .p1 {
+            padding: 40px;
+        }
+
+        .p1 .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0;
+        }
+
+        .p1 .header img {
+            width: 280px;
+            height: auto;
+        }
+
+        .p1 .header-text {
+            text-align: right;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .p1 .header-text p {
+            margin: 1px 0;
+        }
+
+        .p1 .divider-double {
+            border: none;
+            border-top: 3px solid #0f4c81;
+            margin: 12px 0 0 0;
+        }
+
+        .p1 .divider-thin {
+            border: none;
+            border-top: 1px solid #0f4c81;
+            margin: 3px 0 18px 0;
+        }
+
+        .p1 .doc-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 18px;
+        }
+
+        .p1 .doc-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0f4c81;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .p1 .doc-meta {
+            text-align: right;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .p1 .doc-meta strong {
+            color: #0f4c81;
+        }
+
+        .p1 .section-label {
+            font-size: 8.5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: #0f4c81;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1.5px solid #0f4c81;
+            display: inline-block;
+        }
+
+        .p1 .info-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 16px;
+        }
+
+        .p1 .info-group {
+            flex: 1;
+        }
+
+        .p1 .info-group p {
+            margin: 3px 0;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .p1 .info-group p strong {
+            color: #111;
+            font-weight: bold;
+        }
+
+        .p1 table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+            font-size: 11px;
+        }
+
+        .p1 thead tr {
+            background: #0f4c81;
+            color: #fff;
+        }
+
+        .p1 thead th {
+            padding: 7px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 10px;
+            letter-spacing: 0.3px;
+            border: 1px solid #0a3a6a;
+        }
+
+        .p1 thead th:first-child {
+            border-left: none;
+        }
+
+        .p1 thead th:last-child {
+            border-right: none;
+        }
+
+        .p1 tbody tr {
+            border-bottom: 1px solid #dce6f0;
+        }
+
+        .p1 tbody tr:last-child {
+            border-bottom: 2px solid #0f4c81;
+        }
+
+        .p1 tbody td {
+            padding: 6px 10px;
+            color: #333;
+            border-left: 1px solid #e8eef5;
+        }
+
+        .p1 tbody td:first-child {
+            border-left: none;
+        }
+
+        .p1 .totals-wrap {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .p1 .totals-table {
+            width: 340px;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .p1 .totals-table td {
+            padding: 4px 10px;
+            color: #333;
+            border: none;
+        }
+
+        .p1 .totals-table td:first-child {
+            text-align: left;
+            color: #555;
+        }
+
+        .p1 .totals-table td:last-child {
+            text-align: right;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .p1 .totals-table tr.total-final {
+            background: #0f4c81;
+        }
+
+        .p1 .totals-table tr.total-final td {
+            color: #fff;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 7px 10px;
+        }
+
+        .p1 .totals-table tr.subtotal-row td {
+            border-top: 1px solid #c5d5e8;
+            padding-top: 6px;
+        }
+
+        .p1 .tax-line {
+            font-size: 10.5px;
+            color: #555;
+            margin-bottom: 20px;
+            padding: 6px 10px;
+            background: #f4f7fb;
+            border-left: 3px solid #c5d5e8;
+        }
+
+        .p1 .cond-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            font-size: 11px;
+        }
+
+        .p1 .cond-table td {
+            padding: 5px 8px;
+            border: 1px solid #dce6f0;
+            vertical-align: top;
+            color: #333;
+        }
+
+        .p1 .cond-table td.label {
+            background: #f4f7fb;
+            font-weight: bold;
+            color: #0f4c81;
+            width: 22%;
+            white-space: nowrap;
+        }
+
+        .p1 .cond-table td.value {
+            background: #fff;
+            width: 28%;
+        }
+
+        .p1 .obs-block {
+            font-size: 10.5px;
+            color: #444;
+            margin-bottom: 20px;
+            padding: 8px 12px;
+            border: 1px solid #dce6f0;
+            background: #fafcff;
+            line-height: 1.7;
+        }
+
+        .p1 .obs-block strong {
+            color: #0f4c81;
+        }
+
+        .p1 .footer-rule {
+            border: none;
+            border-top: 3px solid #0f4c81;
+            margin: 20px 0 3px 0;
+        }
+
+        .p1 .footer-rule-thin {
+            border: none;
+            border-top: 1px solid #0f4c81;
+            margin: 0 0 10px 0;
+        }
+
+        .p1 .footer {
+            font-size: 10.5px;
+            color: #555;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.7;
+        }
+
+
+        /* ══════════════════════════════════════
+           PÁGINA 2 — PROMOCIONAL
+        ══════════════════════════════════════ */
+        .p2 {
+            padding: 0;
+        }
+
+        .p2 .hero {
+            background: #0f4c81;
+            padding: 36px 40px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p2 .hero-accent {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 220px;
+            height: 100%;
+            background: #0a3a6a;
+            clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        .p2 .hero-accent2 {
+            position: absolute;
+            top: 0;
+            right: 160px;
+            width: 60px;
+            height: 100%;
+            background: #1a6db5;
+            clip-path: polygon(40% 0%, 100% 0%, 60% 100%, 0% 100%);
+        }
+
+        .hero-logo-area img {
+            height: 38px;
+            position: relative;
+            z-index: 2;
+            filter: brightness(0) invert(1);
+        }
+
+        .p2 .hero-logo-area {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .p2 .hero-tagline {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: right;
+        }
+
+        .p2 .hero-title {
+            position: relative;
+            z-index: 2;
+        }
+
+        .p2 .hero-title h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.15;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .p2 .hero-title h1 span {
+            color: #5ab0f0;
+        }
+
+        .p2 .hero-title p {
+            margin-top: 10px;
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 380px;
+            line-height: 1.6;
+        }
+
+        .p2 .hero-badge {
+            display: inline-block;
+            margin-top: 14px;
+            background: #5ab0f0;
+            color: #fff;
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 2px;
+        }
+
+        .p2 .strip {
+            background: #5ab0f0;
+            padding: 7px 40px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .p2 .strip-item {
+            font-size: 9.5px;
+            font-weight: bold;
+            color: #0a3a6a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .p2 .strip-dot {
+            width: 5px;
+            height: 5px;
+            background: #0a3a6a;
+            border-radius: 50%;
+        }
+
+        .p2 .section-intro {
+            padding: 24px 40px 16px;
+            border-bottom: 2px solid #eef3fb;
+        }
+
+        .p2 .section-intro h2 {
+            font-size: 13px;
+            font-weight: bold;
+            color: #0f4c81;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .p2 .section-intro p {
+            font-size: 10.5px;
+            color: #666;
+            margin-top: 4px;
+            line-height: 1.6;
+        }
+
+        .p2 .products-grid {
+            padding: 20px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .p2 .product-row {
+            display: flex;
+            border: 1px solid #dce6f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .p2 .product-icon-col {
+            width: 90px;
+            flex-shrink: 0;
+            background: #0f4c81;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .p2 .product-icon-col svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .p2 .product-content {
+            flex: 1;
+            padding: 14px 18px;
+            background: #fff;
+        }
+
+        .p2 .product-tag {
+            font-size: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #5ab0f0;
+            margin-bottom: 4px;
+        }
+
+        .p2 .product-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #0f4c81;
+            margin-bottom: 6px;
+        }
+
+        .p2 .product-desc {
+            font-size: 10.5px;
+            color: #444;
+            line-height: 1.65;
+        }
+
+        .p2 .product-features {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .p2 .feat-pill {
+            font-size: 9px;
+            background: #eef3fb;
+            color: #0f4c81;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .p2 .product-right {
+            width: 130px;
+            flex-shrink: 0;
+            background: #f4f7fb;
+            border-left: 1px solid #dce6f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .p2 .product-right svg {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 6px;
+        }
+
+        .p2 .product-right-label {
+            font-size: 8.5px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .p2 .footer-banner {
+            margin: 4px 40px 0;
+            background: #0a3a6a;
+            border-radius: 6px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .p2 .footer-banner-left h3 {
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .p2 .footer-banner-left p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 3px;
+        }
+
+        .p2 .footer-banner-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: right;
+        }
+
+        .p2 .footer-contact-item {
+            font-size: 10px;
+            color: #5ab0f0;
+            font-weight: bold;
+        }
+
+        .p2 .footer-contact-label {
+            font-size: 8.5px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .p2 .page-footer {
+            margin: 12px 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            border-top: 1px solid #dce6f0;
+        }
+
+        .p2 .page-footer p {
+            font-size: 9px;
+            color: #aaa;
+            letter-spacing: 0.5px;
+        }
+
+        .p2 .page-footer .site {
+            font-size: 9px;
+            color: #0f4c81;
+            font-weight: bold;
+        }
+
+        /* ══════════════════════════════════════
+           PRINT
+        ══════════════════════════════════════ */
+        @media print {
+            .page {
+                page-break-after: always;
+            }
+
+            .page:last-child {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════
+     PÁGINA 1 — COTAÇÃO FORMAL
+═══════════════════════════════════════ -->
+    <div class="page p1">
+
+        <div class="header">
+            alt="Logo da Empresa">
+            <div class="header-text">
+                @{triggerBody()?['text_12']}
+            </div>
+        </div>
+        <hr class="divider-double">
+        <hr class="divider-thin">
+
+        <div class="doc-header-block">
+            <div class="doc-title">Cotação</div>
+            <div class="doc-meta">
+                <p><strong>N°</strong> @{triggerBody()?['number']}</p>
+                <p><strong>Data de Emissão:</strong> @{formatDateTime(triggerBody()?['date_1'], 'dd/MM/yyyy')}</p>
+                <p><strong>Validade:</strong> 15 dias</p>
+            </div>
+        </div>
+
+        <span class="section-label">Dados da Operação</span>
+        <div class="info-row">
+            <div class="info-group">
+                <p><strong>Tipo de Operação:</strong> @{triggerBody()?['text_13']}</p>
+                <p><strong>Referente:</strong> @{triggerBody()?['text']}</p>
+            </div>
+        </div>
+
+        <span class="section-label">Dados da Empresa</span>
+        <div class="info-row">
+            <div class="info-group">
+                <p><strong>Razão Social:</strong> @{triggerBody()?['text_19']}</p>
+                <p><strong>CNPJ:</strong> @{triggerBody()?['text_15']}</p>
+            </div>
+            <div class="info-group">
+                <p><strong>Contato:</strong> @{triggerBody()?['text_1']}</p>
+                <p><strong>Endereço:</strong> @{triggerBody()?['text_14']}</p>
+            </div>
+        </div>
+
+        <span class="section-label">Produtos</span>
+        <br><br>
+        @{variables('TabelaHTML')}
+
+        <div class="totals-wrap">
+            <table class="totals-table">
+                <tr>
+                    <td>Total Líquido (sem impostos)</td>
+                    <td>@{formatNumber(triggerBody()?['number_3'], 'C', 'pt-BR')}</td>
+                </tr>
+                <tr class="subtotal-row">
+                    <td>Total com PIS, COFINS e ICMS</td>
+                    <td>@{formatNumber(triggerBody()?['number_2'], 'C', 'pt-BR')}</td>
+                </tr>
+                <tr class="total-final">
+                    <td>Total do Pedido (com IPI)</td>
+                    <td>@{formatNumber(triggerBody()?['number_5'], 'C', 'pt-BR')}</td>
+                </tr>
+            </table>
+        </div>
+
+        <span class="section-label">Impostos Aplicados</span>
+        <br><br>
+        <div class="tax-line">
+            PIS — Alíquota 1,65%&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;COFINS — Alíquota 7,60%
+        </div>
+
+        <span class="section-label">Condições Comerciais</span>
+        <br><br>
+        <table class="cond-table">
+            <tr>
+                <td class="label">Prazo de Entrega</td>
+                <td class="value">@{triggerBody()?['text_5']}</td>
+                <td class="label">Frete</td>
+                <td class="value">@{triggerBody()?['text_16']}</td>
+            </tr>
+            <tr>
+                <td class="label">Pagamento</td>
+                <td class="value">@{triggerBody()?['text_6']}</td>
+                <td class="label">Cobrança</td>
+                <td class="value">@{triggerBody()?['text_17']}</td>
+            </tr>
+        </table>
+
+        <div class="obs-block">
+            <strong>Observações:</strong> Aprovação de crédito sujeita a análise financeira. Compras abaixo de R$
+            700,00, pagamento somente à vista.
+        </div>
+
+        <hr class="footer-rule">
+        <hr class="footer-rule-thin">
+        <div class="footer">
+            @{trim(triggerBody()?['text_18'])}
+        </div>
+
+    </div><!-- fim .page.p1 -->
+
+
+    <!-- ═══════════════════════════════════════
+     PÁGINA 2 — PROMOCIONAL
+═══════════════════════════════════════ -->
+    <div class="page p2">
+
+        <div class="hero">
+            <div class="hero-accent"></div>
+            <div class="hero-accent2"></div>
+            <div class="hero-logo-area">
+                <div class="hero-tagline">Referência em não tecidos<br>há mais de 60 anos</div>
+            </div>
+            <div class="hero-title">
+                <h1>Soluções em <span>Filtração</span><br>e Não Tecidos</h1>
+                <p>Tecnologia de ponta em mangas filtrantes, gaiolas, persianas e não tecidos técnicos para as mais
+                    exigentes aplicações industriais.</p>
+                <span class="hero-badge">Portfólio de Produtos</span>
+            </div>
+        </div>
+
+        <div class="strip">
+            <div class="strip-item"><span class="strip-dot"></span> Filtração Industrial</div>
+            <div class="strip-item"><span class="strip-dot"></span> Persianas</div>
+            <div class="strip-item"><span class="strip-dot"></span> Não Tecidos</div>
+            <div class="strip-item"><span class="strip-dot"></span> +60 anos de mercado</div>
+            <div class="strip-item"><span class="strip-dot"></span> Certificações ISO</div>
+        </div>
+
+        <div class="section-intro">
+            <h2>Nossas Linhas de Produtos</h2>
+            <p>Soluções completas desenvolvidas para atender os mais variados segmentos industriais com alta performance
+                e durabilidade.</p>
+        </div>
+
+        <div class="products-grid">
+
+            <!-- Mangas Plissadas -->
+            <div class="product-row">
+                <div class="product-icon-col">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="14" y="4" width="20" height="40" rx="3" fill="rgba(255,255,255,0.15)"
+                            stroke="rgba(255,255,255,0.6)" stroke-width="1.5" />
+                        <line x1="14" y1="10" x2="34" y2="10" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+                        <line x1="14" y1="15" x2="34" y2="15" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+                        <line x1="14" y1="20" x2="34" y2="20" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+                        <line x1="14" y1="25" x2="34" y2="25" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+                        <line x1="14" y1="30" x2="34" y2="30" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+                        <line x1="14" y1="35" x2="34" y2="35" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+                        <rect x="11" y="4" width="6" height="4" rx="1" fill="#5ab0f0" />
+                        <rect x="31" y="4" width="6" height="4" rx="1" fill="#5ab0f0" />
+                        <rect x="11" y="40" width="6" height="4" rx="1" fill="#5ab0f0" />
+                        <rect x="31" y="40" width="6" height="4" rx="1" fill="#5ab0f0" />
+                    </svg>
+                </div>
+                <div class="product-content">
+                    <div class="product-tag">Filtração Industrial</div>
+                    <div class="product-name">Mangas Plissadas e Cartuchos</div>
+                    <div class="product-desc">Desenvolvidas para sistemas de filtração de alta eficiência, as mangas
+                        plissadas Inbrape oferecem maior área filtrante em menor espaço. Fabricadas com materiais
+                        técnicos de alta performance, garantem retenção superior de partículas finas e baixa perda de
+                        carga, prolongando a vida útil dos equipamentos.</div>
+                    <div class="product-features">
+                        <span class="feat-pill">Alta área filtrante</span>
+                        <span class="feat-pill">Baixa perda de carga</span>
+                        <span class="feat-pill">Diversos diâmetros</span>
+                        <span class="feat-pill">Resistência térmica</span>
+                    </div>
+                </div>
+                <div class="product-right">
+                    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="5" width="30" height="60" rx="4" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1.5" />
+                        <line x1="20" y1="14" x2="50" y2="14" stroke="#b5cce8" stroke-width="1" />
+                        <line x1="20" y1="21" x2="50" y2="21" stroke="#b5cce8" stroke-width="1" />
+                        <line x1="20" y1="28" x2="50" y2="28" stroke="#b5cce8" stroke-width="1" />
+                        <line x1="20" y1="35" x2="50" y2="35" stroke="#b5cce8" stroke-width="1" />
+                        <line x1="20" y1="42" x2="50" y2="42" stroke="#b5cce8" stroke-width="1" />
+                        <line x1="20" y1="49" x2="50" y2="49" stroke="#b5cce8" stroke-width="1" />
+                        <line x1="20" y1="56" x2="50" y2="56" stroke="#b5cce8" stroke-width="1" />
+                        <rect x="16" y="5" width="8" height="5" rx="1" fill="#5ab0f0" />
+                        <rect x="46" y="5" width="8" height="5" rx="1" fill="#5ab0f0" />
+                        <rect x="16" y="60" width="8" height="5" rx="1" fill="#5ab0f0" />
+                        <rect x="46" y="60" width="8" height="5" rx="1" fill="#5ab0f0" />
+                    </svg>
+                    <div class="product-right-label">Manga Plissada</div>
+                </div>
+            </div>
+
+            <!-- Mangas Convencionais -->
+            <div class="product-row">
+                <div class="product-icon-col">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="24" cy="8" rx="10" ry="4" fill="rgba(255,255,255,0.2)"
+                            stroke="rgba(255,255,255,0.6)" stroke-width="1.5" />
+                        <rect x="14" y="8" width="20" height="32" fill="rgba(255,255,255,0.1)"
+                            stroke="rgba(255,255,255,0.6)" stroke-width="1.5" />
+                        <ellipse cx="24" cy="40" rx="10" ry="4" fill="rgba(255,255,255,0.2)"
+                            stroke="rgba(255,255,255,0.6)" stroke-width="1.5" />
+                        <line x1="24" y1="4" x2="24" y2="8" stroke="#5ab0f0" stroke-width="2" />
+                        <ellipse cx="24" cy="4" rx="3" ry="2" fill="#5ab0f0" />
+                        <line x1="18" y1="14" x2="30" y2="14" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" />
+                        <line x1="18" y1="20" x2="30" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" />
+                        <line x1="18" y1="26" x2="30" y2="26" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" />
+                        <line x1="18" y1="32" x2="30" y2="32" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" />
+                    </svg>
+                </div>
+                <div class="product-content">
+                    <div class="product-tag">Filtração Industrial</div>
+                    <div class="product-name">Mangas Convencionais (Filtrantes)</div>
+                    <div class="product-desc">As mangas filtrantes convencionais Inbrape são fabricadas em não tecidos
+                        de agulhado, tufados ou tecidos, atendendo a ampla gama de aplicações industriais. Disponíveis
+                        em variados materiais — poliéster, polipropileno, aramida, fibra de vidro e outros — para
+                        diferentes temperaturas e condições químicas.</div>
+                    <div class="product-features">
+                        <span class="feat-pill">Poliéster / PP</span>
+                        <span class="feat-pill">Aramida</span>
+                        <span class="feat-pill">Fibra de vidro</span>
+                        <span class="feat-pill">Sob medida</span>
+                    </div>
+                </div>
+                <div class="product-right">
+                    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="35" cy="12" rx="14" ry="6" fill="#dce6f0" stroke="#b5cce8" stroke-width="1.5" />
+                        <rect x="21" y="12" width="28" height="46" fill="#eef3fb" stroke="#b5cce8" stroke-width="1.5" />
+                        <ellipse cx="35" cy="58" rx="14" ry="6" fill="#dce6f0" stroke="#b5cce8" stroke-width="1.5" />
+                        <line x1="35" y1="6" x2="35" y2="12" stroke="#5ab0f0" stroke-width="2" />
+                        <ellipse cx="35" cy="6" rx="4" ry="2.5" fill="#5ab0f0" />
+                        <line x1="25" y1="22" x2="45" y2="22" stroke="#b5cce8" stroke-width="0.8" />
+                        <line x1="25" y1="30" x2="45" y2="30" stroke="#b5cce8" stroke-width="0.8" />
+                        <line x1="25" y1="38" x2="45" y2="38" stroke="#b5cce8" stroke-width="0.8" />
+                        <line x1="25" y1="46" x2="45" y2="46" stroke="#b5cce8" stroke-width="0.8" />
+                    </svg>
+                    <div class="product-right-label">Manga Filtrante</div>
+                </div>
+            </div>
+
+            <!-- Gaiolas -->
+            <div class="product-row">
+                <div class="product-icon-col">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="24" cy="7" rx="11" ry="4" fill="none" stroke="rgba(255,255,255,0.8)"
+                            stroke-width="1.8" />
+                        <ellipse cx="24" cy="41" rx="11" ry="4" fill="none" stroke="rgba(255,255,255,0.8)"
+                            stroke-width="1.8" />
+                        <line x1="13" y1="7" x2="13" y2="41" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" />
+                        <line x1="35" y1="7" x2="35" y2="41" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" />
+                        <line x1="24" y1="3" x2="24" y2="45" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" />
+                        <ellipse cx="24" cy="17" rx="11" ry="4" fill="none" stroke="rgba(255,255,255,0.5)"
+                            stroke-width="1" />
+                        <ellipse cx="24" cy="27" rx="11" ry="4" fill="none" stroke="rgba(255,255,255,0.5)"
+                            stroke-width="1" />
+                        <ellipse cx="24" cy="37" rx="11" ry="4" fill="none" stroke="rgba(255,255,255,0.5)"
+                            stroke-width="1" />
+                        <ellipse cx="24" cy="7" rx="5" ry="2" fill="#5ab0f0" />
+                    </svg>
+                </div>
+                <div class="product-content">
+                    <div class="product-tag">Filtração Industrial</div>
+                    <div class="product-name">Gaiolas para Mangas Filtrantes</div>
+                    <div class="product-desc">As gaiolas Inbrape são a estrutura de suporte interna das mangas
+                        filtrantes, garantindo integridade e funcionamento correto do sistema de filtração. Fabricadas
+                        em arame galvanizado, aluminizado, inox ou revestido, com ou sem venturi, em diferentes bitolas
+                        e comprimentos conforme especificação do cliente.</div>
+                    <div class="product-features">
+                        <span class="feat-pill">Galvanizado</span>
+                        <span class="feat-pill">Inox</span>
+                        <span class="feat-pill">Com/sem venturi</span>
+                        <span class="feat-pill">Sob medida</span>
+                    </div>
+                </div>
+                <div class="product-right">
+                    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="35" cy="10" rx="16" ry="6" fill="none" stroke="#b5cce8" stroke-width="2" />
+                        <ellipse cx="35" cy="60" rx="16" ry="6" fill="none" stroke="#b5cce8" stroke-width="2" />
+                        <line x1="19" y1="10" x2="19" y2="60" stroke="#b5cce8" stroke-width="1.8" />
+                        <line x1="51" y1="10" x2="51" y2="60" stroke="#b5cce8" stroke-width="1.8" />
+                        <line x1="35" y1="4" x2="35" y2="66" stroke="#b5cce8" stroke-width="1.8" />
+                        <ellipse cx="35" cy="25" rx="16" ry="6" fill="none" stroke="#c8d8ec" stroke-width="1" />
+                        <ellipse cx="35" cy="40" rx="16" ry="6" fill="none" stroke="#c8d8ec" stroke-width="1" />
+                        <ellipse cx="35" cy="10" rx="7" ry="3" fill="#5ab0f0" />
+                    </svg>
+                    <div class="product-right-label">Gaiola</div>
+                </div>
+            </div>
+
+            <!-- Persianas -->
+            <div class="product-row">
+                <div class="product-icon-col">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="5" width="32" height="3" rx="1" fill="rgba(255,255,255,0.9)" />
+                        <rect x="8" y="11" width="32" height="3" rx="1" fill="rgba(255,255,255,0.8)" />
+                        <rect x="8" y="17" width="32" height="3" rx="1" fill="rgba(255,255,255,0.7)" />
+                        <rect x="8" y="23" width="32" height="3" rx="1" fill="rgba(255,255,255,0.6)" />
+                        <rect x="8" y="29" width="32" height="3" rx="1" fill="rgba(255,255,255,0.5)" />
+                        <rect x="8" y="35" width="32" height="3" rx="1" fill="rgba(255,255,255,0.4)" />
+                        <rect x="8" y="41" width="32" height="3" rx="1" fill="rgba(255,255,255,0.3)" />
+                        <line x1="20" y1="3" x2="20" y2="46" stroke="#5ab0f0" stroke-width="1" />
+                        <line x1="28" y1="3" x2="28" y2="46" stroke="#5ab0f0" stroke-width="1" />
+                    </svg>
+                </div>
+                <div class="product-content">
+                    <div class="product-tag">Persianas</div>
+                    <div class="product-name">Componentes para Persianas</div>
+                    <div class="product-desc">A Inbrape fornece linha completa de componentes para fabricantes de
+                        persianas: não tecidos para persianas verticais, lâminas em PVC com acabamentos especiais, rolos
+                        e motores. Produtos com alto padrão de qualidade dimensional e resistência, desenvolvidos para
+                        facilitar a fabricação e garantir durabilidade ao produto final.</div>
+                    <div class="product-features">
+                        <span class="feat-pill">Não tecidos verticais</span>
+                        <span class="feat-pill">Lâminas PVC</span>
+                        <span class="feat-pill">Rolos</span>
+                        <span class="feat-pill">Motores</span>
+                    </div>
+                </div>
+                <div class="product-right">
+                    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="8" width="50" height="5" rx="2" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1" />
+                        <rect x="10" y="17" width="50" height="5" rx="2" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1" />
+                        <rect x="10" y="26" width="50" height="5" rx="2" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1" />
+                        <rect x="10" y="35" width="50" height="5" rx="2" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1" />
+                        <rect x="10" y="44" width="50" height="5" rx="2" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1" />
+                        <rect x="10" y="53" width="50" height="5" rx="2" fill="#dce6f0" stroke="#b5cce8"
+                            stroke-width="1" />
+                        <line x1="28" y1="5" x2="28" y2="62" stroke="#5ab0f0" stroke-width="1.2" />
+                        <line x1="42" y1="5" x2="42" y2="62" stroke="#5ab0f0" stroke-width="1.2" />
+                    </svg>
+                    <div class="product-right-label">Persianas</div>
+                </div>
+            </div>
+
+        </div><!-- fim products-grid -->
+
+        <div class="footer-banner">
+            <div class="footer-banner-left">
+                <h3>Entre em Contato</h3>
+                <p>Solicite um orçamento personalizado para sua aplicação</p>
+            </div>
+            <div class="footer-banner-contacts">
+                <div class="footer-contact-label">Telefone</div>
+                <div class="footer-contact-item">+55 51 3055-5000</div>
+                <div class="footer-contact-label" style="margin-top:6px;">Site</div>
+                <div class="footer-contact-item">www.inbrape.ind.br</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <p>Inbrape Tecidos Industriais — Referência em não tecidos há mais de 60 anos</p>
+            <p class="site">inbrape.ind.br</p>
+        </div>
+
+    </div><!-- fim .page.p2 -->
+
+</body>
+
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotação</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+ 
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #1a1a1a;
+            background: #fff;
+            margin: 40px;
+        }
+ 
+        /* Cabeçalho */
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2.5px solid #0f4c81;
+        }
+ 
+        .header img {
+            width: 300px;
+            height: auto;
+        }
+ 
+        .header-text {
+            text-align: right;
+            font-size: 11px;
+            color: #444;
+            line-height: 1.6;
+        }
+ 
+        .header-text p {
+            margin: 2px 0;
+        }
+ 
+        /* Barra do título */
+        .doc-title-bar {
+            background: #0f4c81;
+            color: #fff;
+            padding: 9px 16px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+ 
+        .doc-title-bar .num {
+            font-size: 13px;
+            font-weight: bold;
+        }
+ 
+        .doc-title-bar .dt {
+            font-size: 11px;
+        }
+ 
+        /* Cards lado a lado */
+        .two-col {
+            width: 100%;
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+ 
+        .info-card {
+            flex: 1;
+            background: #f4f7fb;
+            border: 1px solid #cdd8e8;
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+ 
+        .info-card .card-label {
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #0f4c81;
+            margin-bottom: 7px;
+        }
+ 
+        .info-card p {
+            margin: 3px 0;
+            font-size: 11px;
+            color: #333;
+        }
+ 
+        /* Título de seção */
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin: 20px 0 8px;
+        }
+ 
+        .section-marker {
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: #0f4c81;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+ 
+        .section-head span {
+            font-size: 9.5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #0f4c81;
+        }
+ 
+        /* Tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+            font-size: 11px;
+        }
+ 
+        thead tr {
+            background: #0f4c81;
+            color: #fff;
+        }
+ 
+        thead th {
+            padding: 7px 9px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+        }
+ 
+        tbody tr {
+            border-bottom: 1px solid #e0e8f0;
+        }
+ 
+        tbody tr:nth-child(even) {
+            background: #f4f7fb;
+        }
+ 
+        tbody td {
+            padding: 6px 9px;
+            color: #333;
+        }
+ 
+        /* Totais */
+        .totals-box {
+            background: #eef3fb;
+            border: 1px solid #b5cce8;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+        }
+ 
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 11px;
+            color: #444;
+        }
+ 
+        .totals-row.main {
+            font-weight: bold;
+            font-size: 12px;
+            color: #0f4c81;
+            border-top: 1px solid #bed0e8;
+            margin-top: 6px;
+            padding-top: 7px;
+        }
+ 
+        /* Badges impostos */
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: bold;
+            background: #ddeaf8;
+            color: #0f4c81;
+            padding: 3px 10px;
+            border-radius: 10px;
+            margin-right: 6px;
+        }
+ 
+        .badges-wrap {
+            margin-bottom: 20px;
+        }
+ 
+        /* Condições */
+        .cond-grid {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+ 
+        .cond-item {
+            width: 50%;
+            font-size: 11px;
+            padding: 5px 0;
+            border-bottom: 1px solid #e4eaf2;
+            color: #333;
+        }
+ 
+        .cond-item strong {
+            color: #0f4c81;
+            font-weight: bold;
+        }
+ 
+        /* Observação */
+        .obs-box {
+            background: #fffbf0;
+            border-left: 3px solid #e6a817;
+            padding: 9px 13px;
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+ 
+        /* Rodapé */
+        .footer {
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid #dde4ee;
+            padding-top: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+ 
+    <!-- Cabeçalho -->
+    <div class="header">
+        <img src="data:image/jpeg;base64,COLE_AQUI_O_BASE64" alt="Logo">
+        <div class="header-text">
+            @{triggerBody()?['text_12']}
+        </div>
+    </div>
+ 
+    <!-- Título da Cotação -->
+    <div class="doc-title-bar">
+        <span class="num">Cotação N° @{triggerBody()?['number']}</span>
+        <span class="dt"><strong>Data de Emissão:</strong> @{formatDateTime(triggerBody()?['date_1'], 'dd/MM/yyyy')}</span>
+    </div>
+ 
+    <!-- Operação + Empresa -->
+    <div class="two-col">
+        <div class="info-card">
+            <div class="card-label">Operação</div>
+            <p><strong>Tipo:</strong> @{triggerBody()?['text_13']}</p>
+            <p><strong>Referente:</strong> @{triggerBody()?['text']}</p>
+        </div>
+        <div class="info-card">
+            <div class="card-label">Empresa</div>
+            <p><strong>Nome:</strong> @{triggerBody()?['text_19']}</p>
+            <p><strong>Contato:</strong> @{triggerBody()?['text_1']}</p>
+            <p><strong>Endereço:</strong> @{triggerBody()?['text_14']}</p>
+            <p><strong>CNPJ:</strong> @{triggerBody()?['text_15']}</p>
+        </div>
+    </div>
+ 
+    <!-- Produtos -->
+    <div class="section-head">
+        <span class="section-marker"></span>
+        <span>Produtos</span>
+    </div>
+    @{variables('TabelaHTML')}
+ 
+    <!-- Resumo Financeiro -->
+    <div class="section-head">
+        <span class="section-marker"></span>
+        <span>Resumo Financeiro</span>
+    </div>
+    <div class="totals-box">
+        <div class="totals-row">
+            <span>Total Líquido (sem impostos)</span>
+            <span>@{formatNumber(triggerBody()?['number_3'], 'C', 'pt-BR')}</span>
+        </div>
+        <div class="totals-row">
+            <span>Total com PIS, COFINS e ICMS</span>
+            <span>@{formatNumber(triggerBody()?['number_2'], 'C', 'pt-BR')}</span>
+        </div>
+        <div class="totals-row main">
+            <span>Total do Pedido (com IPI)</span>
+            <span>@{formatNumber(triggerBody()?['number_5'], 'C', 'pt-BR')}</span>
+        </div>
+    </div>
+ 
+    <!-- Impostos -->
+    <div class="section-head">
+        <span class="section-marker"></span>
+        <span>Impostos</span>
+    </div>
+    <div class="badges-wrap">
+        <span class="badge">PIS 1,65%</span>
+        <span class="badge">COFINS 7,60%</span>
+    </div>
+ 
+    <!-- Condições Comerciais -->
+    <div class="section-head">
+        <span class="section-marker"></span>
+        <span>Condições Comerciais</span>
+    </div>
+    <div class="cond-grid">
+        <div class="cond-item"><strong>Prazo de Entrega:</strong> @{triggerBody()?['text_5']}</div>
+        <div class="cond-item"><strong>Frete:</strong> @{triggerBody()?['text_16']}</div>
+        <div class="cond-item"><strong>Pagamento:</strong> @{triggerBody()?['text_6']}</div>
+        <div class="cond-item"><strong>Cobrança:</strong> @{triggerBody()?['text_17']}</div>
+        <div class="cond-item"><strong>Validade:</strong> 15 dias</div>
+    </div>
+ 
+    <!-- Observação -->
+    <div class="obs-box">
+        Aprovação de crédito sujeita a análise financeira. Compras abaixo de R$ 700,00, pagamento somente à vista.
+    </div>
+ 
+    <!-- Rodapé -->
+    <div class="footer">
+        @{trim(triggerBody()?['text_18'])}
+    </div>
+ 
+</body>
+</html>

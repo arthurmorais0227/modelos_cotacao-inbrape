@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbrape - Mangas Convencionais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        @font-face {
+            font-family: 'AlibabaSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Regular.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'AlibabaSans-Medium';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Medium.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Alibaba-PuHuiTi-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Bold.otf') format('opentype');
+        }
+
+        :root {
+            --primary-blue: #003366;
+            --primary-orange: #FF6600;
+            --light-blue: #E6F0FA;
+            --light-orange: #FFF0E6;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --bg-white: #FFFFFF;
+            --bg-light-gray: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            width: 1920px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 1920px;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--primary-blue);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 300px;
+            height: 4px;
+            background-color: var(--primary-orange);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 48px;
+            color: var(--primary-blue);
+            letter-spacing: 2px;
+        }
+
+        .logo-text span {
+            color: var(--primary-orange);
+        }
+
+        .header-title {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 36px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            background-color: var(--bg-light-gray);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 60px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 54px;
+            color: var(--primary-blue);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 22px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 600px;
+            background-image: url('https://a.lovart.ai/artifacts/external/B023GWQqFcDvWsMO.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--bg-light-gray) 0%, transparent 100%);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .section-title {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-title i {
+            color: var(--primary-orange);
+            font-size: 42px;
+        }
+
+        /* Specifications */
+        .specs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background-color: var(--light-blue);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 6px solid var(--primary-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .spec-item:hover {
+            transform: translateX(10px);
+        }
+
+        .spec-icon {
+            font-size: 32px;
+            color: var(--primary-orange);
+            background-color: var(--bg-white);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .spec-text h3 {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 24px;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .spec-text p {
+            font-size: 18px;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* Applications */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .app-card {
+            background-color: var(--bg-white);
+            border: 2px solid #E0E0E0;
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            border-color: var(--primary-orange);
+            box-shadow: 0 10px 20px rgba(255,102,0,0.1);
+        }
+
+        .app-card i {
+            font-size: 36px;
+            color: var(--primary-blue);
+        }
+
+        .app-card span {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 22px;
+            color: var(--text-dark);
+        }
+
+        /* Product Gallery */
+        .gallery-section {
+            background-color: var(--bg-light-gray);
+            padding: 60px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .gallery-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .gallery-info {
+            flex: 1;
+        }
+
+        .gallery-info h2 {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 42px;
+            color: var(--primary-blue);
+            margin-bottom: 24px;
+        }
+
+        .gallery-info p {
+            font-size: 20px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .tag {
+            background-color: var(--light-orange);
+            color: var(--primary-orange);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gallery-image {
+            flex: 1;
+            height: 500px;
+            background-image: url('https://a.lovart.ai/artifacts/external/rBDrSOddQiKId9Wu.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--bg-white);
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 36px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-orange);
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+        }
+
+        .contact-item i {
+            color: var(--primary-orange);
+            font-size: 24px;
+        }
+
+        /* Decorative Elements */
+        .dec-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .dec-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--light-blue) 0%, transparent 70%);
+            top: 100px;
+            right: -100px;
+        }
+        .dec-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--light-orange) 0%, transparent 70%);
+            bottom: 300px;
+            left: -150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dec-circle dec-1"></div>
+    <div class="dec-circle dec-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <i class="ri-filter-3-fill" style="font-size: 48px; color: var(--primary-orange);"></i>
+                <div class="logo-text">INBRAPE<span>.</span></div>
+            </div>
+            <div class="header-title">Mangas Convencionais</div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Filtração Industrial<br>de Alta Performance</h1>
+                <p>As Mangas Convencionais Inbrape são desenvolvidas com tecnologia de ponta para garantir a máxima eficiência na retenção de particulados industriais. Fabricadas com materiais selecionados, oferecem durabilidade e desempenho superior em diversos processos industriais.</p>
+                <div style="display: flex; gap: 20px;">
+                    <div style="background-color: var(--primary-blue); color: white; padding: 15px 30px; border-radius: 8px; font-family: 'AlibabaSans-Medium'; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                        <i class="ri-settings-4-line"></i> Alta Qualidade
+                    </div>
+                    <div style="background-color: var(--primary-orange); color: white; padding: 15px 30px; border-radius: 8px; font-family: 'AlibabaSans-Medium'; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                        <i class="ri-shield-check-line"></i> Durabilidade
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image"></div>
+        </section>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Specifications -->
+            <section>
+                <h2 class="section-title">
+                    <i class="ri-equalizer-line"></i> Especificações Técnicas
+                </h2>
+                <div class="specs-list">
+                    <div class="spec-item">
+                        <div class="spec-icon"><i class="ri-blaze-line"></i></div>
+                        <div class="spec-text">
+                            <h3>Resistência Térmica</h3>
+                            <p>Materiais adequados para diferentes faixas de temperatura, desde processos a frio até altas temperaturas.</p>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-icon"><i class="ri-drop-line"></i></div>
+                        <div class="spec-text">
+                            <h3>Tratamentos Especiais</h3>
+                            <p>Opções de acabamento antiaderente, repelente a água/óleo e tratamentos antiestáticos disponíveis.</p>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-icon"><i class="ri-ruler-line"></i></div>
+                        <div class="spec-text">
+                            <h3>Dimensional Sob Medida</h3>
+                            <p>Fabricação personalizada de acordo com as especificações exatas do equipamento do cliente.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Applications -->
+            <section>
+                <h2 class="section-title">
+                    <i class="ri-building-4-line"></i> Aplicações Industriais
+                </h2>
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <i class="ri-fire-line"></i>
+                        <span>Fornos e Caldeiras</span>
+                    </div>
+                    <div class="app-card">
+                        <i class="ri-tools-line"></i>
+                        <span>Cimenteiras</span>
+                    </div>
+                    <div class="app-card">
+                        <i class="ri-leaf-line"></i>
+                        <span>Agronegócio</span>
+                    </div>
+                    <div class="app-card">
+                        <i class="ri-flask-line"></i>
+                        <span>Indústria Química</span>
+                    </div>
+                    <div class="app-card">
+                        <i class="ri-car-line"></i>
+                        <span>Automotiva</span>
+                    </div>
+                    <div class="app-card">
+                        <i class="ri-cup-line"></i>
+                        <span>Alimentícia</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Product Gallery -->
+        <section class="gallery-section">
+            <div class="gallery-container">
+                <div class="gallery-image"></div>
+                <div class="gallery-info">
+                    <h2>Manga DeCarbon para Fornos de Incineração</h2>
+                    <p>Nossa linha especializada para ambientes extremos oferece resistência excepcional a altas temperaturas e gases corrosivos. Projetada especificamente para garantir a conformidade ambiental e a eficiência do processo em fornos de incineração.</p>
+                    <div class="feature-tags">
+                        <div class="tag"><i class="ri-check-double-line"></i> Alta Resistência</div>
+                        <div class="tag"><i class="ri-check-double-line"></i> Filtragem Fina</div>
+                        <div class="tag"><i class="ri-check-double-line"></i> Longa Vida Útil</div>
+                        <div class="tag"><i class="ri-check-double-line"></i> Fácil Limpeza</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-logo">INBRAPE<span>.</span></div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="ri-phone-line"></i>
+                    <span>+55 (11) 1234-5678</span>
+                </div>
+                <div class="contact-item">
+                    <i class="ri-mail-line"></i>
+                    <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6d61607a6f7a614e67606c7c6f7e6b206d6163206c7c">[email&#160;protected]</a></span>
+                </div>
+                <div class="contact-item">
+                    <i class="ri-map-pin-line"></i>
+                    <span>São Paulo, SP - Brasil</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
